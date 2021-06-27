@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UITableViewController{
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
@@ -16,13 +16,37 @@ class ViewController: UITableViewController{
         // Do any additional setup after loading the view.
     }
 
+    
+    // MARK: TableView configuration
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return taskArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! TaskCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! TaskCell
+        cell = createTasks(cell, indexPath)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let editTaskController = EditTaskController()
+        self.navigationController?.pushViewController(editTaskController, animated: true)
+    }
+    
+    // MARK: Misc
+    func createTasks(_ cell: TaskCell, _ indexPath: IndexPath) -> TaskCell{
+        cell.nameLabel.text = taskArray[indexPath.row].taskName
+        cell.descLabel.text = taskArray[indexPath.row].taskDescription
+        cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
+        return cell
+    }
+    
+    let taskArray = [
+        Task(taskName: "Task 1", taskDescription: "Description 1", taskDone: false, taskDeadline: "date 1"),
+        Task(taskName: "Task 2", taskDescription: "Description 2", taskDone: false, taskDeadline: "date 2"),
+        Task(taskName: "Task 3", taskDescription: "Description 3", taskDone: false, taskDeadline: "date 3"),
+        Task(taskName: "Task 4", taskDescription: "Description 4", taskDone: false, taskDeadline: "date 4")
+    ]
+
 }
 

@@ -14,6 +14,7 @@
 		BB7B8D952688AF7400DA1951 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB7B8D932688AF7400DA1951 /* LaunchScreen.storyboard */; };
 		BB7B8D9D2688B21400DA1951 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8D9C2688B21400DA1951 /* Task.swift */; };
 		BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */; };
+		BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BB7B8D962688AF7400DA1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB7B8D9C2688B21400DA1951 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +63,12 @@
 				BB7B8D882688AF7200DA1951 /* AppDelegate.swift */,
 				BB7B8D8A2688AF7200DA1951 /* SceneDelegate.swift */,
 				BB7B8D8C2688AF7200DA1951 /* ViewController.swift */,
+				BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */,
+				BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */,
 				BB7B8D9C2688B21400DA1951 /* Task.swift */,
 				BB7B8D912688AF7400DA1951 /* Assets.xcassets */,
 				BB7B8D932688AF7400DA1951 /* LaunchScreen.storyboard */,
 				BB7B8D962688AF7400DA1951 /* Info.plist */,
-				BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */,
 			);
 			path = TodoSecond;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				BB7B8D8D2688AF7200DA1951 /* ViewController.swift in Sources */,
 				BB7B8D892688AF7200DA1951 /* AppDelegate.swift in Sources */,
 				BB7B8D8B2688AF7200DA1951 /* SceneDelegate.swift in Sources */,
+				BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */,
 				BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
