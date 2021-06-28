@@ -30,6 +30,9 @@ class ViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let editTaskController = EditTaskController()
+        editTaskController.nameField.text = taskArray[indexPath.row].taskName
+        editTaskController.descField.text = taskArray[indexPath.row].taskDescription
+//        editTaskController.deadline.setDate(Date(taskArray[indexPath.row].taskDeadline), animated: false)
         self.navigationController?.pushViewController(editTaskController, animated: true)
     }
     
