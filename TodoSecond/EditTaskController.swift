@@ -72,34 +72,35 @@ class EditTaskController: UIViewController {
         view.addSubview(taskDeadlineLable)
         view.addSubview(deadline)
 
-        let constraints = [taskNameLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-                           taskNameLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           taskNameLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                           taskNameLabel.heightAnchor.constraint(equalToConstant: 30),
+        let constraints = [
+            taskNameLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            taskNameLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            taskNameLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            taskNameLabel.heightAnchor.constraint(equalToConstant: 30),
                            
-                           nameField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30),
-                           nameField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           nameField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                           nameField.heightAnchor.constraint(equalToConstant: 30),
+            nameField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30),
+            nameField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            nameField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            nameField.heightAnchor.constraint(equalToConstant: 30),
 
-                           taskDescLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 60),
-                           taskDescLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           taskDescLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                           taskDescLabel.heightAnchor.constraint(equalToConstant: 30),
+            taskDescLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 60),
+            taskDescLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            taskDescLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            taskDescLabel.heightAnchor.constraint(equalToConstant: 30),
 
-                           descField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 90),
-                           descField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           descField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                           descField.heightAnchor.constraint(equalToConstant: 60),
+            descField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 90),
+            descField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            descField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            descField.heightAnchor.constraint(equalToConstant: 60),
 
-                           taskDeadlineLable.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 150),
-                           taskDeadlineLable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           taskDeadlineLable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-                           taskDeadlineLable.heightAnchor.constraint(equalToConstant: 30),
+            taskDeadlineLable.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 150),
+            taskDeadlineLable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            taskDeadlineLable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            taskDeadlineLable.heightAnchor.constraint(equalToConstant: 30),
 
-                           deadline.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 180),
-                           deadline.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                           deadline.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            deadline.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 180),
+            deadline.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            deadline.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
 
         ]
         

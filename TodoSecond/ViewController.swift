@@ -7,16 +7,19 @@
 
 import UIKit
 
-class ViewController: UITableViewController{
+class ViewController: UITableViewController, UINavigationControllerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         tableView.register(TaskCell.self, forCellReuseIdentifier: "cellID")
+        view.addSubview(navigationBar)
+        let constraints = [
+            navigationBar.topAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutYAxisAnchor>#>)
+        ]
         // Do any additional setup after loading the view.
     }
 
-    
     // MARK: TableView configuration
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskArray.count
@@ -50,6 +53,11 @@ class ViewController: UITableViewController{
         Task(taskName: "Task 3", taskDescription: "Description 3", taskDone: false, taskDeadline: "date 3"),
         Task(taskName: "Task 4", taskDescription: "Description 4", taskDone: false, taskDeadline: "date 4")
     ]
-
+    
+    let navigationBar: UINavigationBar = {
+        let nBar = UINavigationBar()
+        nBar.translatesAutoresizingMaskIntoConstraints = false
+        return nBar
+    }()
 }
 
