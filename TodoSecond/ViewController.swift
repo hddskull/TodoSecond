@@ -7,14 +7,22 @@
 
 import UIKit
 
-class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
+class ViewController: UITableViewController, TaskCreationProtocol{
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         tableView.register(TaskCell.self, forCellReuseIdentifier: "cellID")
         setupNavBar()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTask(_:)))
+    }
+    // хуйзнает как обновлять ячейки после добавления новой таски
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        view.backgroundColor = .systemTeal
+        tableView.register(TaskCell.self, forCellReuseIdentifier: "cellID")
+        setupNavBar()
     }
 
     // MARK: TableView configuration
@@ -29,11 +37,7 @@ class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editTaskController = EditTaskController()
-        editTaskController.nameField.text = taskArray[indexPath.row].taskName
-        editTaskController.descField.text = taskArray[indexPath.row].taskDescription
-//        editTaskController.deadline.setDate(Date(taskArray[indexPath.row].taskDeadline), animated: false)
-        self.navigationController?.pushViewController(editTaskController, animated: true)
+        editTask(indexPath)
     }
     
     // MARK: NavigationBar
@@ -42,6 +46,7 @@ class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
 //        self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         self.title = "ToDo Second"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTask(_:)))
     }
     
     // MARK: Misc
@@ -51,6 +56,16 @@ class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
         cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
         return cell
     }
+    
+    func editTask(_ indexPath: IndexPath){
+        let editTaskController = EditTaskController()
+        editTaskController.nameField.text = taskArray[indexPath.row].taskName
+        editTaskController.descField.text = taskArray[indexPath.row].taskDescription
+        editTaskController.taskToVC = self
+//        editTaskController.deadline.setDate(Date(taskArray[indexPath.row].taskDeadline), animated: false)
+        self.navigationController?.pushViewController(editTaskController, animated: true)
+    }
+    
     @objc func addTask(_ sender: UIBarButtonItem) {
         let addTaskView = EditTaskController()
         addTaskView.nameField.text = " "
@@ -58,10 +73,14 @@ class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
         self.navigationController?.pushViewController(addTaskView, animated: true)
     }
     
+    func createNewTask(_ task: Task) {
+        taskArray.append(task)
+    }
     
-    // MARK: Variables
+    
+    // MARK: Properties
 
-    let taskArray = [
+    var taskArray = [
         Task(taskName: "Task 1", taskDescription: "Description 1", taskDone: false, taskDeadline: "date 1"),
         Task(taskName: "Task 2", taskDescription: "Description 2", taskDone: false, taskDeadline: "date 2"),
         Task(taskName: "Task 3", taskDescription: "Description 3", taskDone: false, taskDeadline: "date 3"),

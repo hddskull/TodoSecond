@@ -8,8 +8,9 @@
 import Foundation
 
 struct Task {
-    var taskName: String
-    var taskDescription: String
-    var taskDone: Bool
-    var taskDeadline: String
+    var taskName: String?
+    var taskDescription: String?
+    var taskDone: Bool?
+    var taskDeadline: String?
 }
+

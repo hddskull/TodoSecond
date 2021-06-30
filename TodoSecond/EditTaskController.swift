@@ -12,10 +12,13 @@ class EditTaskController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createETCConstraints()
+        customizeNB()
         // Do any additional setup after loading the view.
     }
     
-    //viewdidapper
+    var taskToVC: TaskCreationProtocol?
+    
+    
     // MARK: UI elements
     let taskNameLabel: UILabel = {
        var lbl = UILabel()
@@ -64,6 +67,16 @@ class EditTaskController: UIViewController {
         return dpicker
     }()
     
+    let warningLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Заполните все поля!"
+        lbl.textColor = #colorLiteral(red: 1, green: 0.01224201724, blue: 0, alpha: 1)
+        lbl.font = UIFont.systemFont(ofSize: 28)
+        lbl.isHidden = true
+        return lbl
+    }()
+    
     //MARK: Constraints
     func createETCConstraints(){
         view.backgroundColor = .white
@@ -73,6 +86,7 @@ class EditTaskController: UIViewController {
         view.addSubview(descField)
         view.addSubview(taskDeadlineLable)
         view.addSubview(deadline)
+        view.addSubview(warningLabel)
 
         let constraints = [
             taskNameLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
@@ -103,10 +117,34 @@ class EditTaskController: UIViewController {
             deadline.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 180),
             deadline.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             deadline.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            
+            warningLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 240),
+            warningLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            warningLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
 
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    func customizeNB(){
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(getNewTask(_:)))
+    }
+
+    //Перепроверить условия, походу таска не создает и не аппендится в начальный контроллер
+    @objc func getNewTask(_ sender: UIBarButtonItem) {
+        if self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false {
+            let newTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "some date")
+            taskToVC?.createNewTask(newTask)
+            
+        }
+        else {
+            warningLabel.isHidden = false
+        }
+    }
+
+
+    
+    
     
 }
