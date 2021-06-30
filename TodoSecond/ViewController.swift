@@ -7,17 +7,14 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UINavigationControllerDelegate{
+class ViewController: UITableViewController/*, UINavigationControllerDelegate*/{
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         tableView.register(TaskCell.self, forCellReuseIdentifier: "cellID")
-        view.addSubview(navigationBar)
-        let constraints = [
-            navigationBar.topAnchor.constraint(equalTo: <#T##NSLayoutAnchor<NSLayoutYAxisAnchor>#>)
-        ]
-        // Do any additional setup after loading the view.
+        setupNavBar()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTask(_:)))
     }
 
     // MARK: TableView configuration
@@ -39,6 +36,14 @@ class ViewController: UITableViewController, UINavigationControllerDelegate{
         self.navigationController?.pushViewController(editTaskController, animated: true)
     }
     
+    // MARK: NavigationBar
+    
+    func setupNavBar(){
+//        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        self.title = "ToDo Second"
+    }
+    
     // MARK: Misc
     func createTasks(_ cell: TaskCell, _ indexPath: IndexPath) -> TaskCell{
         cell.nameLabel.text = taskArray[indexPath.row].taskName
@@ -46,7 +51,16 @@ class ViewController: UITableViewController, UINavigationControllerDelegate{
         cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
         return cell
     }
+    @objc func addTask(_ sender: UIBarButtonItem) {
+        let addTaskView = EditTaskController()
+        addTaskView.nameField.text = " "
+        addTaskView.descField.text = " "
+        self.navigationController?.pushViewController(addTaskView, animated: true)
+    }
     
+    
+    // MARK: Variables
+
     let taskArray = [
         Task(taskName: "Task 1", taskDescription: "Description 1", taskDone: false, taskDeadline: "date 1"),
         Task(taskName: "Task 2", taskDescription: "Description 2", taskDone: false, taskDeadline: "date 2"),
@@ -54,10 +68,6 @@ class ViewController: UITableViewController, UINavigationControllerDelegate{
         Task(taskName: "Task 4", taskDescription: "Description 4", taskDone: false, taskDeadline: "date 4")
     ]
     
-    let navigationBar: UINavigationBar = {
-        let nBar = UINavigationBar()
-        nBar.translatesAutoresizingMaskIntoConstraints = false
-        return nBar
-    }()
+
 }
 

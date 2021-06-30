@@ -16,6 +16,7 @@
 		BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */; };
 		BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */; };
 		EFA59C48268B6BB900093963 /* misc in Resources */ = {isa = PBXBuildFile; fileRef = EFA59C47268B6BB900093963 /* misc */; };
+		EFA59C4A268C9F0500093963 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA59C49268C9F0500093963 /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskController.swift; sourceTree = "<group>"; };
 		EFA59C47268B6BB900093963 /* misc */ = {isa = PBXFileReference; lastKnownFileType = text; path = misc; sourceTree = "<group>"; };
+		EFA59C49268C9F0500093963 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				BB7B8D882688AF7200DA1951 /* AppDelegate.swift */,
 				BB7B8D8A2688AF7200DA1951 /* SceneDelegate.swift */,
 				BB7B8D8C2688AF7200DA1951 /* ViewController.swift */,
+				EFA59C49268C9F0500093963 /* NavigationController.swift */,
 				BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */,
 				BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */,
 				EFA59C47268B6BB900093963 /* misc */,
@@ -151,6 +154,7 @@
 				BB7B8D892688AF7200DA1951 /* AppDelegate.swift in Sources */,
 				BB7B8D8B2688AF7200DA1951 /* SceneDelegate.swift in Sources */,
 				BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */,
+				EFA59C4A268C9F0500093963 /* NavigationController.swift in Sources */,
 				BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
