@@ -15,8 +15,12 @@ class EditTaskController: UIViewController {
         customizeNB()
         // Do any additional setup after loading the view.
     }
-    
+    //delegate property
     var taskToVC: TaskCreationProtocol?
+    //property flag to decide if adding a new task or editiing old one
+    var makingNewTask: Bool?
+    //property to call protocol method to edit existing task in array
+    var indexPathRow: Int?
     
     
     // MARK: UI elements
@@ -131,19 +135,30 @@ class EditTaskController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(getNewTask(_:)))
     }
 
-    //Перепроверить условия, походу таска не создает и не аппендится в начальный контроллер
     @objc func getNewTask(_ sender: UIBarButtonItem) {
-        if self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false {
-            let newTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "some date")
+        if self.taskToVC != nil && self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false && self.makingNewTask == true {
+            let date = dateToString(deadline)
+            let newTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "\(date)")
             taskToVC?.createNewTask(newTask)
-            
+            navigationController?.popViewController(animated: true)
+        }
+        else if self.taskToVC != nil && self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false && self.makingNewTask == false {
+            let date = dateToString(deadline)
+            let oldTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "\(date)")
+            taskToVC?.updateTask(oldTask, self.indexPathRow!)
+            navigationController?.popViewController(animated: true)
         }
         else {
             warningLabel.isHidden = false
         }
     }
-
-
+    
+    func dateToString(_ datePicker: UIDatePicker)-> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yy"
+        let date = formatter.string(from: datePicker.date)
+        return date
+    }
     
     
     
