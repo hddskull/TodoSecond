@@ -6,10 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ViewController: UITableViewController, TaskCreationProtocol{
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,8 @@ class ViewController: UITableViewController, TaskCreationProtocol{
 
     // MARK: TableView configuration
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+//        return taskArray.count
+        return tasksDB.arrayOfTasks().count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,9 +68,13 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     
     // MARK: Misc
     func createTasks(_ cell: TaskCell, _ indexPath: IndexPath) -> TaskCell{
-        cell.nameLabel.text = taskArray[indexPath.row].taskName
-        cell.descLabel.text = taskArray[indexPath.row].taskDescription
-        cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
+        //realmDB
+        cell.nameLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskName
+        cell.descLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDescription
+        cell.deadlineLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDeadline
+//        cell.nameLabel.text = taskArray[indexPath.row].taskName
+//        cell.descLabel.text = taskArray[indexPath.row].taskDescription
+//        cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
         return cell
     }
     
@@ -94,11 +98,12 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     }
     
     func createNewTask(_ task: Task) {
-        taskArray.append(task)
+        tasksDB.saveNewTask(task)
+//        taskArray.append(task)
         self.tableView.reloadData()
     }
     func updateTask(_ task: Task, _ indexPathRow: Int){
-        var taskToUpd = taskArray[indexPathRow]
+        let taskToUpd = taskArray[indexPathRow]
         taskArray.remove(at: indexPathRow)
         taskToUpd.taskName = task.taskName
         taskToUpd.taskDescription = task.taskDescription
@@ -124,7 +129,10 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         self.tableView.reloadData()
     }
     
+
     // MARK: Properties
+    
+    var tasksDB = TasksDB()
     
 //    var taskArray = [Task]()
     var taskArray = [
@@ -133,6 +141,10 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         Task(taskName: "Task 3", taskDescription: "Description 3", taskDone: false, taskDeadline: "date 3"),
         Task(taskName: "Task 4", taskDescription: "Description 4", taskDone: false, taskDeadline: "date 4")
     ]
+    
+    // MARK: RealmDB Config
+    
+
 
 
 }
