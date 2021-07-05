@@ -23,7 +23,6 @@ class ViewController: UITableViewController, TaskCreationProtocol{
 
     // MARK: TableView configuration
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return taskArray.count
         return tasksDB.arrayOfTasks().count
     }
     

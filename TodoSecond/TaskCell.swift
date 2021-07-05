@@ -8,6 +8,7 @@
 import UIKit
 
 class TaskCell: UITableViewCell {
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,7 @@ class TaskCell: UITableViewCell {
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.text = "Task name here"
         nameLabel.textAlignment = .left
+        nameLabel.textColor = .black
         return nameLabel
     }()
 
@@ -33,6 +35,7 @@ class TaskCell: UITableViewCell {
         descLabel.translatesAutoresizingMaskIntoConstraints = false
         descLabel.text = "Task description here"
         descLabel.textAlignment = .left
+        descLabel.textColor = .black
         return descLabel
     }()
     
@@ -41,6 +44,7 @@ class TaskCell: UITableViewCell {
         deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
         deadlineLabel.text = "Tomorrow"
         deadlineLabel.textAlignment = .right
+        deadlineLabel.textColor = .black
         return deadlineLabel
     }()
     
@@ -58,6 +62,7 @@ class TaskCell: UITableViewCell {
 
 extension TaskCell {
     func createCellConstraints(){
+        contentView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(deadlineLabel)

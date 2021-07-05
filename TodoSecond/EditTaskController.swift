@@ -29,6 +29,7 @@ class EditTaskController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Name of the task"
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        lbl.textColor = .black
         return lbl
     }()
     let taskDescLabel: UILabel = {
@@ -36,7 +37,7 @@ class EditTaskController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Description of the task"
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-
+        lbl.textColor = .black
         return lbl
      }()
     let taskDeadlineLable: UILabel = {
@@ -44,7 +45,7 @@ class EditTaskController: UIViewController {
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Choose a deadline"
         lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-
+        lbl.textColor = .black
         return lbl
      }()
     
@@ -54,6 +55,7 @@ class EditTaskController: UIViewController {
         txtf.font = UIFont.systemFont(ofSize: 16)
         txtf.textAlignment = .left
         txtf.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        txtf.textColor = .black
         return txtf
     }()
     let descField: UITextView = {
@@ -62,6 +64,7 @@ class EditTaskController: UIViewController {
         txtv.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         txtv.textAlignment = .left
         txtv.font = UIFont.systemFont(ofSize: 16)
+        txtv.textColor = .black
         return txtv
     }()
     let deadline: UIDatePicker = {
