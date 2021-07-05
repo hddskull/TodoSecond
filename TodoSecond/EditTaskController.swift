@@ -135,18 +135,20 @@ class EditTaskController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(getNewTask(_:)))
     }
 
+    //MARK: Save button
     @objc func getNewTask(_ sender: UIBarButtonItem) {
         //create new task
         if self.taskToVC != nil && self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false && self.makingNewTask == true {
             let date = dateToString(deadline)
             let newTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: date)
-//            let newTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "\(date)")
+            
             taskToVC?.createNewTask(newTask)
             navigationController?.popViewController(animated: true)
         }
         else if self.taskToVC != nil && self.nameField.text?.isEmpty == false && self.descField.text.isEmpty == false && self.makingNewTask == false {
             let date = dateToString(deadline)
-            let oldTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: "\(date)")
+            let oldTask = Task(taskName: self.nameField.text!, taskDescription: descField.text!, taskDone: false, taskDeadline: date)
+            
             taskToVC?.updateTask(oldTask, self.indexPathRow!)
             navigationController?.popViewController(animated: true)
         }

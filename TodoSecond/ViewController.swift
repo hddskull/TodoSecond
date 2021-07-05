@@ -66,30 +66,31 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTask(_:)))
     }
     
-    // MARK: Misc
+    // MARK: Task functions
     func createTasks(_ cell: TaskCell, _ indexPath: IndexPath) -> TaskCell{
-        //realmDB
         cell.nameLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskName
         cell.descLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDescription
         cell.deadlineLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDeadline
-//        cell.nameLabel.text = taskArray[indexPath.row].taskName
-//        cell.descLabel.text = taskArray[indexPath.row].taskDescription
-//        cell.deadlineLabel.text = taskArray[indexPath.row].taskDeadline
         return cell
     }
     
     func editTask(_ indexPath: IndexPath){
         let editTaskController = EditTaskController()
-        editTaskController.nameField.text = taskArray[indexPath.row].taskName
-        editTaskController.descField.text = taskArray[indexPath.row].taskDescription
+        let taskToEdit = tasksDB.arrayOfTasks()[indexPath.row]
+        
+        editTaskController.nameField.text = taskToEdit.taskName
+        editTaskController.descField.text = taskToEdit.taskDescription
+        let date = stringToDate(taskToEdit.taskDeadline!)
+        editTaskController.deadline.setDate(date, animated: true)
+        
         editTaskController.taskToVC = self
         editTaskController.makingNewTask = false
         editTaskController.indexPathRow = indexPath.row
-        let date = stringToDate(taskArray[indexPath.row].taskDeadline!)
-        editTaskController.deadline.setDate(date, animated: true)
+
         self.navigationController?.pushViewController(editTaskController, animated: true)
     }
     
+    // action for bar button
     @objc func addTask(_ sender: UIBarButtonItem) {
         let addTaskView = EditTaskController()
         addTaskView.taskToVC = self
@@ -99,17 +100,13 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     
     func createNewTask(_ task: Task) {
         tasksDB.saveNewTask(task)
-//        taskArray.append(task)
         self.tableView.reloadData()
     }
+    
     func updateTask(_ task: Task, _ indexPathRow: Int){
-        let taskToUpd = taskArray[indexPathRow]
-        taskArray.remove(at: indexPathRow)
-        taskToUpd.taskName = task.taskName
-        taskToUpd.taskDescription = task.taskDescription
-        taskToUpd.taskDeadline = task.taskDeadline
-        taskToUpd.taskDone = task.taskDone
-        taskArray.insert(taskToUpd, at: indexPathRow)
+        let taskToUpd = tasksDB.arrayOfTasks()[indexPathRow]
+        tasksDB.deleteTask(taskToUpd)
+        tasksDB.saveNewTask(task)
         self.tableView.reloadData()
     }
 
@@ -121,11 +118,14 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     }
     
     func doneHandeler(indexPathRow: Int){
-        taskArray[indexPathRow].taskDone = true
+        let taskDone = tasksDB.arrayOfTasks()[indexPathRow]
+        tasksDB.taskDone(taskDone)
+        self.tableView.reloadData()
     }
     
     func deleteHandler(indexPathRow: Int){
-        taskArray.remove(at: indexPathRow)
+        let taskToDelete = tasksDB.arrayOfTasks()[indexPathRow]
+        tasksDB.deleteTask(taskToDelete)
         self.tableView.reloadData()
     }
     
@@ -134,18 +134,5 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     
     var tasksDB = TasksDB()
     
-//    var taskArray = [Task]()
-    var taskArray = [
-        Task(taskName: "Task 1", taskDescription: "Description 1", taskDone: false, taskDeadline: "date 1"),
-        Task(taskName: "Task 2", taskDescription: "Description 2", taskDone: false, taskDeadline: "date 2"),
-        Task(taskName: "Task 3", taskDescription: "Description 3", taskDone: false, taskDeadline: "date 3"),
-        Task(taskName: "Task 4", taskDescription: "Description 4", taskDone: false, taskDeadline: "date 4")
-    ]
-    
-    // MARK: RealmDB Config
-    
-
-
-
 }
 
