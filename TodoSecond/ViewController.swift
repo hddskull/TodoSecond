@@ -21,9 +21,10 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         view.backgroundColor = .systemTeal
     }
 
+    
     // MARK: TableView configuration
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tasksDB.arrayOfTasks().count
+        return sortedByDone().count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,6 +42,7 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         editTask(indexPath)
     }
     
+    
     // MARK: Swipe Actions
     
     //swipe to finish task
@@ -52,6 +54,7 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         
         return UISwipeActionsConfiguration(actions: [action])
     }
+    
     //swipe to delete task
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction(style: .destructive, title: "Delete") {
@@ -61,6 +64,7 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         
         return UISwipeActionsConfiguration(actions: [action])
     }
+    
     
     // MARK: NavigationBar
     
@@ -72,16 +76,16 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     
     // MARK: Task functions
     func createTasks(_ cell: TaskCell, _ indexPath: IndexPath) -> TaskCell{
-        cell.nameLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskName
-        cell.descLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDescription
-        cell.deadlineLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDeadline
-        cell.done = tasksDB.arrayOfTasks()[indexPath.row].taskDone
+        cell.nameLabel.text = sortedByDone()[indexPath.row].taskName
+        cell.descLabel.text = sortedByDone()[indexPath.row].taskDescription
+        cell.deadlineLabel.text = sortedByDone()[indexPath.row].taskDeadline
+        cell.done = sortedByDone()[indexPath.row].taskDone
         return cell
     }
     
     func editTask(_ indexPath: IndexPath){
         let editTaskController = EditTaskController()
-        let taskToEdit = tasksDB.arrayOfTasks()[indexPath.row]
+        let taskToEdit = sortedByDone()[indexPath.row]
         
         editTaskController.nameField.text = taskToEdit.taskName
         editTaskController.descField.text = taskToEdit.taskDescription
@@ -101,7 +105,7 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     }
     
     func updateTask(_ task: Task, _ indexPathRow: Int){
-        let taskToUpd = tasksDB.arrayOfTasks()[indexPathRow]
+        let taskToUpd = sortedByDone()[indexPathRow]
         tasksDB.deleteTask(taskToUpd)
         tasksDB.saveNewTask(task)
         self.tableView.reloadData()
@@ -117,19 +121,19 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     //MARK: Handlers
     
     func doneHandeler(indexPathRow: Int){
-        let taskDone = tasksDB.arrayOfTasks()[indexPathRow]
+        let taskDone = sortedByDone()[indexPathRow]
         tasksDB.taskDone(taskDone)
         self.tableView.reloadData()
     }
     
     func deleteHandler(indexPathRow: Int){
-        let taskToDelete = tasksDB.arrayOfTasks()[indexPathRow]
+        let taskToDelete = sortedByDone()[indexPathRow]
         tasksDB.deleteTask(taskToDelete)
         self.tableView.reloadData()
     }
     
     
-    // MARK: save button action
+    // MARK: Navigation button action
     @objc func addTask(_ sender: UIBarButtonItem) {
         let addTaskView = EditTaskController()
         addTaskView.taskToVC = self
@@ -138,7 +142,8 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     }
     
     
-    // MARK: other funcs
+    // MARK: Cell color display
+    
     func cellForDoneTask(_ taskCell: TaskCell) -> TaskCell{
         taskCell.contentView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         taskCell.deadlineLabel.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
@@ -153,6 +158,12 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         taskCell.nameLabel.textColor = .black
         taskCell.descLabel.textColor = .black
         return taskCell
+    }
+    
+    func sortedByDone() ->[Task]{
+        let taskArr = tasksDB.arrayOfTasks()
+        return taskArr.sorted(by: {!$0.taskDone && $1.taskDone})
+        
     }
     
     

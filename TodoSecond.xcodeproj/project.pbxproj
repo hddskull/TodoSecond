@@ -81,10 +81,10 @@
 				BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */,
 				EFA59C47268B6BB900093963 /* misc */,
 				BB7B8D9C2688B21400DA1951 /* Task.swift */,
+				EFD5345C268F6DD200B080C1 /* TasksDB.swift */,
 				BB7B8D912688AF7400DA1951 /* Assets.xcassets */,
 				BB7B8D932688AF7400DA1951 /* LaunchScreen.storyboard */,
 				BB7B8D962688AF7400DA1951 /* Info.plist */,
-				EFD5345C268F6DD200B080C1 /* TasksDB.swift */,
 			);
 			path = TodoSecond;
 			sourceTree = "<group>";

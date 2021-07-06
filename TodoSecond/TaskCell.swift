@@ -14,6 +14,8 @@ class TaskCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    // MARK: Cell content
     var done: Bool?
     
     let nameLabel: UILabel = {
@@ -44,7 +46,7 @@ class TaskCell: UITableViewCell {
         return deadlineLabel
     }()
     
-    
+    // MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -56,6 +58,7 @@ class TaskCell: UITableViewCell {
     }
 }
 
+// MARK: Cell constraints
 extension TaskCell {
     func createCellConstraints(){
         

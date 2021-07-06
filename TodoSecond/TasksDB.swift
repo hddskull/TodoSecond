@@ -11,20 +11,25 @@ import RealmSwift
 class TasksDB {
     var realm: Realm = try! Realm()
     
+    
     public func saveNewTask(_ task: Task){
         try! realm.write{
             realm.add(task)
         }
     }
+
+    
     public func arrayOfTasks() -> Results<Task> {
         return realm.objects(Task.self)
     }
+
     
     public func deleteTask(_ task: Task) {
         try! realm.write{
             realm.delete(task)
         }
     }
+    
     
     public func taskDone(_ task: Task) {
         try! realm.write{
