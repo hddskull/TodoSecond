@@ -14,12 +14,7 @@ class TaskCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    var done: Bool?
     
     let nameLabel: UILabel = {
         var nameLabel = UILabel()
@@ -36,6 +31,7 @@ class TaskCell: UITableViewCell {
         descLabel.text = "Task description here"
         descLabel.textAlignment = .left
         descLabel.textColor = .black
+        descLabel.numberOfLines = 2
         return descLabel
     }()
     
@@ -62,7 +58,6 @@ class TaskCell: UITableViewCell {
 
 extension TaskCell {
     func createCellConstraints(){
-        contentView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         
         contentView.addSubview(nameLabel)
         contentView.addSubview(deadlineLabel)

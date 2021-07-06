@@ -29,6 +29,11 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! TaskCell
         cell = createTasks(cell, indexPath)
+        if cell.done == true {
+            cell = cellForDoneTask(cell)
+        } else {
+            cell = cellForCurrentTask(cell)
+        }
         return cell
     }
     
@@ -70,6 +75,7 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         cell.nameLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskName
         cell.descLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDescription
         cell.deadlineLabel.text = tasksDB.arrayOfTasks()[indexPath.row].taskDeadline
+        cell.done = tasksDB.arrayOfTasks()[indexPath.row].taskDone
         return cell
     }
     
@@ -87,14 +93,6 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         editTaskController.indexPathRow = indexPath.row
 
         self.navigationController?.pushViewController(editTaskController, animated: true)
-    }
-    
-    // action for bar button
-    @objc func addTask(_ sender: UIBarButtonItem) {
-        let addTaskView = EditTaskController()
-        addTaskView.taskToVC = self
-        addTaskView.makingNewTask = true
-        self.navigationController?.pushViewController(addTaskView, animated: true)
     }
     
     func createNewTask(_ task: Task) {
@@ -116,6 +114,8 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         return date!
     }
     
+    //MARK: Handlers
+    
     func doneHandeler(indexPathRow: Int){
         let taskDone = tasksDB.arrayOfTasks()[indexPathRow]
         tasksDB.taskDone(taskDone)
@@ -128,7 +128,34 @@ class ViewController: UITableViewController, TaskCreationProtocol{
         self.tableView.reloadData()
     }
     
-
+    
+    // MARK: save button action
+    @objc func addTask(_ sender: UIBarButtonItem) {
+        let addTaskView = EditTaskController()
+        addTaskView.taskToVC = self
+        addTaskView.makingNewTask = true
+        self.navigationController?.pushViewController(addTaskView, animated: true)
+    }
+    
+    
+    // MARK: other funcs
+    func cellForDoneTask(_ taskCell: TaskCell) -> TaskCell{
+        taskCell.contentView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        taskCell.deadlineLabel.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        taskCell.nameLabel.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        taskCell.descLabel.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        return taskCell
+    }
+    
+    func cellForCurrentTask(_ taskCell: TaskCell) -> TaskCell{
+        taskCell.contentView.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
+        taskCell.deadlineLabel.textColor = .black
+        taskCell.nameLabel.textColor = .black
+        taskCell.descLabel.textColor = .black
+        return taskCell
+    }
+    
+    
     // MARK: Properties
     
     var tasksDB = TasksDB()
