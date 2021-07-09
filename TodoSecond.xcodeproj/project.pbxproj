@@ -16,6 +16,11 @@
 		BB7B8D9D2688B21400DA1951 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8D9C2688B21400DA1951 /* Task.swift */; };
 		BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */; };
 		BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */; };
+		DFCE2F0F2695D2F2006DBF3B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F0E2695D2F2006DBF3B /* LoginController.swift */; };
+		DFCE2F112695F260006DBF3B /* HideByTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F102695F260006DBF3B /* HideByTap.swift */; };
+		DFCE2F132697518F006DBF3B /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F122697518F006DBF3B /* RegistrationController.swift */; };
+		DFCE2F17269859F0006DBF3B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F16269859F0006DBF3B /* User.swift */; };
+		DFCE2F1926988CEA006DBF3B /* RegistrationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F1826988CEA006DBF3B /* RegistrationProtocol.swift */; };
 		EFA59C48268B6BB900093963 /* misc in Resources */ = {isa = PBXBuildFile; fileRef = EFA59C47268B6BB900093963 /* misc */; };
 		EFA59C4C268CE05E00093963 /* TaskCreationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA59C4B268CE05E00093963 /* TaskCreationProtocol.swift */; };
 		EFD5345D268F6DD200B080C1 /* TasksDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD5345C268F6DD200B080C1 /* TasksDB.swift */; };
@@ -35,6 +40,11 @@
 		BB7B8D9C2688B21400DA1951 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskController.swift; sourceTree = "<group>"; };
+		DFCE2F0E2695D2F2006DBF3B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		DFCE2F102695F260006DBF3B /* HideByTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideByTap.swift; sourceTree = "<group>"; };
+		DFCE2F122697518F006DBF3B /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		DFCE2F16269859F0006DBF3B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DFCE2F1826988CEA006DBF3B /* RegistrationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationProtocol.swift; sourceTree = "<group>"; };
 		EFA59C47268B6BB900093963 /* misc */ = {isa = PBXFileReference; lastKnownFileType = text; path = misc; sourceTree = "<group>"; };
 		EFA59C4B268CE05E00093963 /* TaskCreationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCreationProtocol.swift; sourceTree = "<group>"; };
 		EFD5345C268F6DD200B080C1 /* TasksDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksDB.swift; sourceTree = "<group>"; };
@@ -73,18 +83,23 @@
 		BB7B8D872688AF7200DA1951 /* TodoSecond */ = {
 			isa = PBXGroup;
 			children = (
-				BB7B8D882688AF7200DA1951 /* AppDelegate.swift */,
-				BB7B8D8A2688AF7200DA1951 /* SceneDelegate.swift */,
 				BB7B8D8C2688AF7200DA1951 /* ViewController.swift */,
-				EFA59C4B268CE05E00093963 /* TaskCreationProtocol.swift */,
 				BB7B8D9E2688B33C00DA1951 /* TaskCell.swift */,
 				BB7B8DA02688FC8100DA1951 /* EditTaskController.swift */,
-				EFA59C47268B6BB900093963 /* misc */,
 				BB7B8D9C2688B21400DA1951 /* Task.swift */,
+				DFCE2F16269859F0006DBF3B /* User.swift */,
 				EFD5345C268F6DD200B080C1 /* TasksDB.swift */,
+				EFA59C4B268CE05E00093963 /* TaskCreationProtocol.swift */,
+				DFCE2F0E2695D2F2006DBF3B /* LoginController.swift */,
+				DFCE2F122697518F006DBF3B /* RegistrationController.swift */,
+				DFCE2F1826988CEA006DBF3B /* RegistrationProtocol.swift */,
+				DFCE2F102695F260006DBF3B /* HideByTap.swift */,
 				BB7B8D912688AF7400DA1951 /* Assets.xcassets */,
-				BB7B8D932688AF7400DA1951 /* LaunchScreen.storyboard */,
 				BB7B8D962688AF7400DA1951 /* Info.plist */,
+				EFA59C47268B6BB900093963 /* misc */,
+				BB7B8D882688AF7200DA1951 /* AppDelegate.swift */,
+				BB7B8D8A2688AF7200DA1951 /* SceneDelegate.swift */,
+				BB7B8D932688AF7400DA1951 /* LaunchScreen.storyboard */,
 			);
 			path = TodoSecond;
 			sourceTree = "<group>";
@@ -220,10 +235,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFCE2F17269859F0006DBF3B /* User.swift in Sources */,
+				DFCE2F112695F260006DBF3B /* HideByTap.swift in Sources */,
 				BB7B8D9D2688B21400DA1951 /* Task.swift in Sources */,
+				DFCE2F0F2695D2F2006DBF3B /* LoginController.swift in Sources */,
 				BB7B8D8D2688AF7200DA1951 /* ViewController.swift in Sources */,
 				BB7B8D892688AF7200DA1951 /* AppDelegate.swift in Sources */,
+				DFCE2F1926988CEA006DBF3B /* RegistrationProtocol.swift in Sources */,
 				BB7B8D8B2688AF7200DA1951 /* SceneDelegate.swift in Sources */,
+				DFCE2F132697518F006DBF3B /* RegistrationController.swift in Sources */,
 				EFD5345D268F6DD200B080C1 /* TasksDB.swift in Sources */,
 				BB7B8DA12688FC8100DA1951 /* EditTaskController.swift in Sources */,
 				BB7B8D9F2688B33C00DA1951 /* TaskCell.swift in Sources */,

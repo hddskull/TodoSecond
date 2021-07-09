@@ -15,6 +15,8 @@ class EditTaskController: UIViewController {
         customizeNB()
         // Do any additional setup after loading the view.
     }
+    
+    //MARK: Properties
     //delegate property
     var taskToVC: TaskCreationProtocol?
     //property flag to decide if adding a new task or editiing old one
