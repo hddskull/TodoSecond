@@ -6,15 +6,24 @@
 //
 
 import UIKit
+import SnapKit
 
-class EditTaskController: UIViewController {
+class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createETCConstraints()
+        
         customizeNB()
-        // Do any additional setup after loading the view.
+        self.hideKeyboard()
+        initTFdelegates()
+//        createETCConstraints()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        snapConstraints()
+    }
+    
     
     //MARK: Properties
     //delegate property
@@ -26,115 +35,19 @@ class EditTaskController: UIViewController {
     
     
     // MARK: UI elements
-    let taskNameLabel: UILabel = {
-       var lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Name of the task"
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        lbl.textColor = .black
-        return lbl
-    }()
-    let taskDescLabel: UILabel = {
-        var lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Description of the task"
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        lbl.textColor = .black
-        return lbl
-     }()
-    let taskDeadlineLable: UILabel = {
-        var lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Choose a deadline"
-        lbl.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        lbl.textColor = .black
-        return lbl
-     }()
     
-    let nameField: UITextField = {
-        var txtf = UITextField()
-        txtf.translatesAutoresizingMaskIntoConstraints = false
-        txtf.font = UIFont.systemFont(ofSize: 16)
-        txtf.textAlignment = .left
-        txtf.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        txtf.textColor = .black
-        return txtf
-    }()
-    let descField: UITextView = {
-        var txtv = UITextView()
-        txtv.translatesAutoresizingMaskIntoConstraints = false
-        txtv.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        txtv.textAlignment = .left
-        txtv.font = UIFont.systemFont(ofSize: 16)
-        txtv.textColor = .black
-        return txtv
-    }()
-    let deadline: UIDatePicker = {
-        var dpicker = UIDatePicker()
-        dpicker.translatesAutoresizingMaskIntoConstraints = false
-        dpicker.datePickerMode = .date
-        return dpicker
-    }()
     
-    let warningLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Заполните все поля!"
-        lbl.textColor = #colorLiteral(red: 1, green: 0.01224201724, blue: 0, alpha: 1)
-        lbl.font = UIFont.systemFont(ofSize: 28)
-        lbl.isHidden = true
-        return lbl
-    }()
-    
-    //MARK: Constraints
-    func createETCConstraints(){
-        view.backgroundColor = .white
-        view.addSubview(taskNameLabel)
-        view.addSubview(nameField)
-        view.addSubview(taskDescLabel)
-        view.addSubview(descField)
-        view.addSubview(taskDeadlineLable)
-        view.addSubview(deadline)
-        view.addSubview(warningLabel)
+    var scrollView = UIScrollView(frame: .zero)
+    let stackview = UIStackView()
+    let contentView = UIView()
+    let taskNameLabel = UILabel()
+    let taskDescLabel = UILabel()
+    let taskDeadlineLable = UILabel()
+    let nameField = UITextField()
+    let descField = UITextView()
+    var deadline = UIDatePicker()
+    let emptyLabel = UILabel()
 
-        let constraints = [
-            taskNameLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            taskNameLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            taskNameLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            taskNameLabel.heightAnchor.constraint(equalToConstant: 30),
-                           
-            nameField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 30),
-            nameField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            nameField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            nameField.heightAnchor.constraint(equalToConstant: 30),
-
-            taskDescLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 60),
-            taskDescLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            taskDescLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            taskDescLabel.heightAnchor.constraint(equalToConstant: 30),
-
-            descField.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 90),
-            descField.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            descField.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            descField.heightAnchor.constraint(equalToConstant: 60),
-
-            taskDeadlineLable.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 150),
-            taskDeadlineLable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            taskDeadlineLable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            taskDeadlineLable.heightAnchor.constraint(equalToConstant: 30),
-
-            deadline.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 180),
-            deadline.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            deadline.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            
-            warningLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 240),
-            warningLabel.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            warningLabel.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
-    }
     
     func customizeNB(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(getNewTask(_:)))
@@ -158,7 +71,10 @@ class EditTaskController: UIViewController {
             navigationController?.popViewController(animated: true)
         }
         else {
-            warningLabel.isHidden = false
+            let alertFields = UIAlertController(title: "Error", message: "Please fill in the name, description and deadline date", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertFields.addAction(ok)
+            navigationController?.present(alertFields, animated: true, completion: nil)
         }
     }
     
@@ -170,5 +86,179 @@ class EditTaskController: UIViewController {
     }
     
     
+    //MARK: Move to next TextField
     
+    
+    func initTFdelegates(){
+        nameField.delegate = self
+        descField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == nameField {
+            nameField.resignFirstResponder()
+            descField.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    
+    //MARK: Constraints
+    
+    
+    func createETCConstraints(){
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        
+        
+        
+//        contentView.addArrangedSubview(taskNameLabel)
+//        contentView.addArrangedSubview(nameField)
+//        contentView.addArrangedSubview(taskDescLabel)
+//        contentView.addArrangedSubview(descField)
+//        contentView.addArrangedSubview(taskDeadlineLable)
+//        contentView.addArrangedSubview(deadline)
+ 
+        
+        
+        let constraints = [
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            nameField.heightAnchor.constraint(equalToConstant: 30),
+            
+            descField.heightAnchor.constraint(equalToConstant: 80),
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    func snapConstraints () {
+        
+        
+        view.addSubview(scrollView)
+        
+        scrollView.backgroundColor = .purple
+        scrollView.frame = self.view.bounds
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        scrollView.snp.makeConstraints { (make) -> Void in
+            make.top.bottom.leading.trailing.width.equalTo(view)
+        }
+        
+        
+        scrollView.addSubview(stackview)
+        
+        stackview.backgroundColor = .systemBlue
+        stackview.axis = .vertical
+//        scrollView.contentSize = contentView.frame.size
+        stackview.snp.makeConstraints { (make) -> Void in
+            make.top.bottom.equalTo(scrollView)
+            make.leading.trailing.equalTo(view)
+        }
+        
+        stackview.addArrangedSubview(taskNameLabel)
+        
+        taskNameLabel.text = "Name of the task"
+        taskNameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        taskNameLabel.textColor = .black
+        
+//        taskNameLabel.snp.makeConstraints { (make) -> Void in
+//            make.top.equalTo(contentView.snp.top).offset(100)
+//            make.leading.equalTo(contentView.snp.leading).inset(40)
+//            make.trailing.equalTo(contentView.snp.trailing).inset(20)
+//            make.height.equalTo(30)
+//        }
+        
+        stackview.addArrangedSubview(nameField)
+        
+        nameField.font = UIFont.systemFont(ofSize: 16)
+        nameField.textAlignment = .left
+        nameField.textColor = .black
+        nameField.backgroundColor = .white
+        nameField.layer.cornerRadius = 12
+        nameField.layer.borderWidth = 1
+    
+//        nameField.snp.makeConstraints { (make)-> Void in
+//            make.top.equalTo(taskNameLabel.snp.bottom)
+//            make.leading.equalTo(contentView.snp.leading).inset(20)
+//            make.trailing.equalTo(contentView.snp.trailing).inset(20)
+//            make.height.equalTo(40)
+//        }
+        
+        stackview.addArrangedSubview(taskDescLabel)
+        
+        taskDescLabel.text = "Description of the task"
+        taskDescLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        taskDescLabel.textColor = .black
+        
+//        taskDescLabel.snp.makeConstraints { (make)-> Void in
+//            make.top.equalTo(nameField.snp.bottom).offset(10)
+//            make.leading.trailing.height.equalTo(taskNameLabel)
+//        }
+        
+        stackview.addArrangedSubview(descField)
+        
+        descField.textAlignment = .left
+        descField.font = UIFont.systemFont(ofSize: 16)
+        descField.textColor = .black
+        descField.backgroundColor = .white
+        descField.layer.cornerRadius = 12
+        descField.layer.borderWidth = 1
+        
+        descField.snp.makeConstraints { (make)->Void in
+//            make.top.equalTo(taskDescLabel.snp.bottom)
+//            make.leading.trailing.equalTo(nameField)
+            make.height.equalTo(400)
+        }
+    
+        stackview.addArrangedSubview(taskDeadlineLable)
+        
+        taskDeadlineLable.text = "Choose a deadline"
+        taskDeadlineLable.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        taskDeadlineLable.textColor = .black
+        
+//        taskDeadlineLable.snp.makeConstraints { (make)->Void in
+//            make.top.equalTo(descField.snp.bottom).offset(10)
+//            make.leading.trailing.height.equalTo(taskNameLabel)
+//        }
+        
+        stackview.addArrangedSubview(deadline)
+        
+        deadline.datePickerMode = .date
+        deadline.preferredDatePickerStyle = UIDatePickerStyle.wheels
+        deadline.backgroundColor = .systemGray2
+        deadline.datePickerMode = UIDatePicker.Mode.date
+        deadline.layer.masksToBounds = true
+        deadline.layer.cornerRadius = 12
+        
+//        deadline.snp.makeConstraints{ (make)->Void in
+//            make.top.equalTo(taskDeadlineLable.snp.bottom)
+//            make.leading.trailing.equalTo(descField)
+//        }
+        
+        stackview.addArrangedSubview(emptyLabel)
+        
+        emptyLabel.backgroundColor = .systemYellow
+        emptyLabel.snp.makeConstraints { (make)->Void in
+            make.width.equalTo(stackview.snp.width)
+            make.height.equalTo(100)
+        }
+        
+        scrollView.contentSize = stackview.frame.size
+        print(scrollView.contentSize)
+        
+    }
 }

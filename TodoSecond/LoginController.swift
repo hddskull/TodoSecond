@@ -88,7 +88,9 @@ class LoginController: UIViewController, UITextFieldDelegate, UIScrollViewDelega
     }
     
     //MARK: Properties
-    var loginData = [User(login: "Test", password: "Test")]
+    var loginData = [User(login: "Test", password: "Test"),
+                     User(login: "T", password: "T")
+        ]
     
     
     

@@ -7,11 +7,13 @@
 
 import UIKit
 
-class RegistrationController: UIViewController {
+class RegistrationController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         createConstaintsRC()
+        self.hideKeyboard()
+        initTFdelegates()
         // Do any additional setup after loading the view.
     }
     
@@ -98,6 +100,25 @@ class RegistrationController: UIViewController {
             return false
         }
     }
+    
+    //MARK: Move to next TextField
+    
+    func initTFdelegates(){
+        passwordTF.delegate = self
+        emailTF.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTF {
+            emailTF.resignFirstResponder()
+            passwordTF.becomeFirstResponder()
+        } else if textField == passwordTF {
+            passwordTF.resignFirstResponder()
+        }
+        return true
+    }
+    
+    //MARK: Constraints
     
     func createConstaintsRC() {
         navigationController?.navigationBar.isTranslucent = true
