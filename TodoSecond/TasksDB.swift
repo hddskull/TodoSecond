@@ -48,10 +48,4 @@ class TasksDB {
         
     }
     
-    
-//    public func findByName() -> Task {
-//        realm.
-//    }
-    
-    
 }

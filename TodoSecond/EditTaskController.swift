@@ -149,7 +149,7 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         view.addSubview(scrollView)
         
-        scrollView.backgroundColor = .purple
+        scrollView.backgroundColor = .systemBlue
         scrollView.frame = self.view.bounds
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
@@ -163,10 +163,13 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         stackview.backgroundColor = .systemBlue
         stackview.axis = .vertical
-//        scrollView.contentSize = contentView.frame.size
+        //        scrollView.contentSize = contentView.frame.size
         stackview.snp.makeConstraints { (make) -> Void in
             make.top.bottom.equalTo(scrollView)
-            make.leading.trailing.equalTo(view)
+//            make.leading.trailing.equalTo(view)
+            make.leading.equalTo(view).offset(20)
+            make.trailing.equalTo(view).inset(20)
+
         }
         
         stackview.addArrangedSubview(taskNameLabel)
@@ -175,21 +178,21 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         taskNameLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         taskNameLabel.textColor = .black
         
-//        taskNameLabel.snp.makeConstraints { (make) -> Void in
+        taskNameLabel.snp.makeConstraints { (make) -> Void in
 //            make.top.equalTo(contentView.snp.top).offset(100)
 //            make.leading.equalTo(contentView.snp.leading).inset(40)
 //            make.trailing.equalTo(contentView.snp.trailing).inset(20)
-//            make.height.equalTo(30)
-//        }
+            make.height.equalTo(50)
+        }
         
         stackview.addArrangedSubview(nameField)
         
-        nameField.font = UIFont.systemFont(ofSize: 16)
+        nameField.font = UIFont.systemFont(ofSize: 20)
         nameField.textAlignment = .left
         nameField.textColor = .black
         nameField.backgroundColor = .white
-        nameField.layer.cornerRadius = 12
-        nameField.layer.borderWidth = 1
+        nameField.layer.cornerRadius = 5
+//        nameField.layer.borderWidth = 1
     
 //        nameField.snp.makeConstraints { (make)-> Void in
 //            make.top.equalTo(taskNameLabel.snp.bottom)
@@ -204,10 +207,11 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         taskDescLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         taskDescLabel.textColor = .black
         
-//        taskDescLabel.snp.makeConstraints { (make)-> Void in
+        taskDescLabel.snp.makeConstraints { (make)-> Void in
 //            make.top.equalTo(nameField.snp.bottom).offset(10)
 //            make.leading.trailing.height.equalTo(taskNameLabel)
-//        }
+            make.height.equalTo(50)
+        }
         
         stackview.addArrangedSubview(descField)
         
@@ -215,13 +219,13 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         descField.font = UIFont.systemFont(ofSize: 16)
         descField.textColor = .black
         descField.backgroundColor = .white
-        descField.layer.cornerRadius = 12
-        descField.layer.borderWidth = 1
-        
+        descField.layer.cornerRadius = 5
+//        descField.layer.borderWidth = 1
+
         descField.snp.makeConstraints { (make)->Void in
 //            make.top.equalTo(taskDescLabel.snp.bottom)
 //            make.leading.trailing.equalTo(nameField)
-            make.height.equalTo(400)
+            make.height.equalTo(200)
         }
     
         stackview.addArrangedSubview(taskDeadlineLable)
@@ -230,19 +234,20 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         taskDeadlineLable.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         taskDeadlineLable.textColor = .black
         
-//        taskDeadlineLable.snp.makeConstraints { (make)->Void in
+        taskDeadlineLable.snp.makeConstraints { (make)->Void in
 //            make.top.equalTo(descField.snp.bottom).offset(10)
 //            make.leading.trailing.height.equalTo(taskNameLabel)
-//        }
+        make.height.equalTo(50)
+        }
         
         stackview.addArrangedSubview(deadline)
         
         deadline.datePickerMode = .date
         deadline.preferredDatePickerStyle = UIDatePickerStyle.wheels
-        deadline.backgroundColor = .systemGray2
+        deadline.backgroundColor = .white
         deadline.datePickerMode = UIDatePicker.Mode.date
         deadline.layer.masksToBounds = true
-        deadline.layer.cornerRadius = 12
+        deadline.layer.cornerRadius = 5
         
 //        deadline.snp.makeConstraints{ (make)->Void in
 //            make.top.equalTo(taskDeadlineLable.snp.bottom)
@@ -251,7 +256,7 @@ class EditTaskController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         
         stackview.addArrangedSubview(emptyLabel)
         
-        emptyLabel.backgroundColor = .systemYellow
+        emptyLabel.backgroundColor = .systemBlue
         emptyLabel.snp.makeConstraints { (make)->Void in
             make.width.equalTo(stackview.snp.width)
             make.height.equalTo(100)

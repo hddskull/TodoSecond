@@ -12,13 +12,12 @@ class ViewController: UITableViewController, TaskCreationProtocol{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemBlue
         tableView.register(TaskCell.self, forCellReuseIdentifier: "cellID")
         setupNavBar()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        view.backgroundColor = .systemTeal
     }
 
     
